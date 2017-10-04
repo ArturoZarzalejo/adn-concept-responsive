@@ -1,0 +1,1 @@
+!function(e){"use strict";var t=e.querySelector("#app");t.isAuthenticated=0,t.displayInstalledToast=function(){e.querySelector("platinum-sw-cache").disabled||e.querySelector("#caching-complete").show()},t.addEventListener("dom-change",function(){console.log("Our app is ready to rock!")}),window.addEventListener("WebComponentsReady",function(){})}(document);
