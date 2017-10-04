@@ -1,0 +1,158 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html"><link rel="import" href="../cl-login-page/cl-login-page.html"><link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html"><link rel="import" href="../../bower_components/neon-animation/neon-animatable-behavior.html"><link rel="import" href="../../bower_components/neon-animation/animations/slide-left-animation.html"><link rel="import" href="../../bower_components/neon-animation/animations/slide-down-animation.html"><link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html"><link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html"><link rel="import" href="../../bower_components/neon-animation/animations/transform-animation.html"><link rel="import" href="../cl-animations/cl-reverse-ripple-animation.html"><dom-module id="cl-welcome-page"><template><style include="shared-styles"></style><style>
+      
+      :host {
+        display: block;
+        color: var(--paper-toolbar-color, --text-primary-color);
+        z-index: 99;
+      }
+
+      :host > *{
+        z-index: 1;
+      }
+
+      #background{
+        background: #250735;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      #profilePhoto{
+        background-color: var(--light-primary-color);
+        background-size: contain;
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        overflow: hidden;
+        margin: auto;
+      }
+
+      #title{
+        transform: translate(0, 200%);
+        position: fixed;
+        top: 40%;
+        width: 100%;
+        text-align: center;
+      }
+
+      #userCard{
+        opacity: 0;
+        transform: translate(0,-32%);
+      }
+
+      #loginPage{
+        transform: translate(0, 0); 
+      }
+      
+    </style><div id="background"></div><h2 id="title" class="page-title"><span>Welcome to my App</span></h2><div id="userCard"><div id="profilePhoto" hidden$="{{!userLogged}}"></div><div id="user" hidden$="{{!userLogged}}"><p>{{userData.usuario}}</p></div></div><cl-login-page hidden$="{{userLogged}}" user-logged="{{userLogged}}" user-data="{{userData}}" id="loginPage"></cl-login-page></template><script>
+    (function() {
+      'use strict';
+
+      var animationFired = false;
+      
+      Polymer({
+        is: 'cl-welcome-page',
+
+        behaviors: [
+          Polymer.NeonAnimationRunnerBehavior,
+          Polymer.NeonAnimatableBehavior
+        ],
+
+        properties: {
+          userData:{
+            type: Object,
+            observer: '_onUserLogged'
+          },
+          userLogged: {
+            type: Boolean
+          },
+
+          animationConfig: {
+            value: function() {
+              return {
+                'loginOn':[{
+                  name: 'transform-animation',
+                  node: this.$.title,
+                  transformFrom: 'translate(0, 200%)',
+                  transformTo: 'translate(0, -300%)'
+                },{
+                  name: 'fade-in-animation',
+                  node: this.$.userCard,
+                  timing: {delay: 400}
+                }],
+                'entry': [{
+                  name: 'fade-in-animation',
+                  node: this.$.title
+                }],
+                'exit': [{
+                  name: 'cl-reverse-ripple-animation',
+                  id: 'loginPage',
+                  fromPage: this,
+                  timing: {duration: 400, easing: 'cubic-bezier(1, 0.1, 0.47, 0.6)'}
+                },{
+                  name: 'hero-animation',
+                  id: 'profilePhoto',
+                  fromPage: this,
+                  timing: {delay: 300, duration: 500, easing: 'cubic-bezier(1, 0.1, 0.47, 0.6)'}
+                },{
+                  name: 'fade-out-animation',
+                  node: this.$.user,
+                  timing: {duration: 200}
+                },{
+                  name: 'fade-out-animation',
+                  node: this.$.title,
+                  timing: {duration: 200}
+                }]
+              }
+            }
+          },
+          sharedElements: {
+            value: function() {
+              return {
+                'loginPage': this.$.background,
+                'profilePhoto': this.$.profilePhoto
+              }
+            }
+          }
+
+        },
+
+        listeners: {
+          // this event is fired when the animation finishes
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
+
+        _onNeonAnimationFinish: function(){
+          this.$.loginPage.show();
+          this.$.userCard.style.opacity = 1;
+          this.getAnimationConfig('loginOn')[0].node.style.transform = this.getAnimationConfig('loginOn')[0].transformTo;
+        },
+
+        _onUserLogged: function(){
+          
+          this.$.profilePhoto.style.backgroundImage = 'url('+this.userData.usuarioimg+')';
+          setTimeout(function() {
+            // document.querySelector('#paperDrawerPanel').openDrawer();
+            document.getElementById('app').isAuthenticated = 1;
+
+            setTimeout(function(){
+              // document.querySelector('#paperDrawerPanel').closeDrawer();
+            }, 1000);
+          }.bind(this), 1300);
+        },
+
+
+        ready: function(){         
+          setTimeout(function() {
+            this.playAnimation('loginOn');
+            this.$.loginPage._login({ obtener_session_info : true });
+          }.bind(this), 200);
+        }
+
+
+
+      });
+    })();
+  </script></dom-module>

@@ -1,0 +1,54 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html"><dom-module id="cl-core-drag-element"><template><style include="shared-styles"></style><style type="text/css">
+      #pruebas{
+        background: red; width: 50px; height: 50px; position: relative; padding: 1em; margin: 0.5em; display: block;
+      };
+      :host {
+        display: block; padding: 1em;
+      }
+    </style></template><script>
+    (function() {
+      Polymer({
+        is: 'cl-core-drag-element',
+
+        properties: {
+          typeElement: {
+            type: Object,
+            notify: true,
+            // observer: '_createElement'
+          },
+        },
+
+        ready: function(){
+          // console.log('generado elemento');
+          this._createElement(this.typeElement);
+        },
+
+        _drag : function () {
+          console.log('drag arguments', arguments);
+          arguments[0].dataTransfer.setData('text', arguments[0].target.id);
+        },
+
+        _createElement : function () {
+          // console.log('ELEMENTO', arguments);
+
+          var element = document.createElement(arguments[0].comp_subtype_ctip_id);
+          element.id = arguments[0].comp_id;
+          element.textContent = arguments[0].comp_subtype_ctip_id;
+          element.style.width = '50px';
+          element.style.height = '50px';
+          element.style.border = '1px solid #000';
+          element.setAttribute('draggable', true);
+
+          this.appendChild(element);
+
+          element.addEventListener('click', function () {
+            console.log(arguments);
+          }, false);
+
+          element.addEventListener('dragstart', this._drag, false);
+
+        }
+      });
+
+    })();
+  </script></dom-module>

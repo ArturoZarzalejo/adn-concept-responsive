@@ -1,0 +1,65 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html"><link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html"><dom-module id="cl-auth-srv"><template><style include="shared-styles"></style><style>
+      :host {
+        display: block;
+      }
+    </style><iron-ajax id="ajax" last-response="{{loginResponse}}" handleas="json" method="POST"></iron-ajax></template><script>
+    (function() {
+      'use strict';
+      
+      Polymer({
+        is: 'cl-auth-srv',
+
+        properties: {
+          userData:{
+            type: Object,
+            notify: true
+          },
+          userLogged:{
+            type: Boolean,
+            notify: true,
+            value: false
+          },
+          loginResponse:{
+            type: Object,
+            observer: '_loginDone'
+          }
+
+
+        },
+
+        ready: function(){
+          // compAPI.get('22', '', true).then(function(){
+          //   console.info(arguments[0]);
+          // });
+          // console.log(this.get);
+        },
+
+        dologin: function(){
+          // this.$.ajax.url = "../../api/auth.php";
+          // this.$.ajax.body = JSON.stringify(arguments[1] ?  {login:{ 
+          //   user: this.user,
+          //   password: this.pass
+          // }} : arguments[0]);
+          // this.$.ajax.generateRequest();
+          this.loginResponse = {
+            usuario: 'Arturo Zarzalejo',
+            usuariocargo: 'Front End Architech',
+            usuarioimg : 'https://avatars2.githubusercontent.com/u/6556976?v=3&s=460'
+          }
+        },
+
+        _loginDone: function(){
+          if(this.loginResponse){
+            // this.userData = this.loginResponse.data.draco.session.user;
+            this.userData = this.loginResponse;
+            this.userLogged = true;  
+          }else{
+            this.userLogged = false;  
+          }
+        },
+
+        
+
+      });
+    })();
+  </script></dom-module>

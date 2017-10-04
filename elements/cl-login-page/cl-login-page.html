@@ -1,0 +1,123 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html"><link rel="import" href="../cl-auth-srv/cl-auth-srv.html"><link rel="import" href="../../bower_components/paper-input/paper-input.html"><link rel="import" href="../../bower_components/paper-styles/paper-styles.html"><link rel="import" href="../../bower_components/paper-button/paper-button.html"><link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html"><link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html"><link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html"><link rel="import" href="../cl-animations/cl-reverse-ripple-animation.html"><link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html"><link rel="import" href="../../bower_components/neon-animation/animations/hero-animation.html"><link rel="import" href="../../bower_components/neon-animation/animations/slide-from-right-animation.html"><link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html"><dom-module id="cl-login-page"><template><style include="shared-styles"></style><style>
+      
+      :host {
+        opacity: 0;
+        display: block;
+        color: var(--paper-toolbar-color, --text-primary-color);
+        background: var(--paper-toolbar-background, --default-primary-color);
+        z-index: 1;
+        width: 30%;
+      }
+
+      paper-button {
+        background: var(--paper-toolbar-color, --text-primary-color);
+        color: var(--paper-toolbar-background, --default-primary-color)
+      }
+
+
+      #profilePhoto{
+        background-color: var(--light-primary-color);
+        background-size: contain;
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        overflow: hidden;
+        margin: auto;
+
+      }
+
+      #profilePhoto svg{
+        fill:  var(--dark-primary-color);
+        height: 120px;
+        margin-left: -10px;
+      }
+
+      
+    </style><iron-ajax id="ajax" last-response="{{loginResponse}}" handleas="json" method="POST"></iron-ajax><cl-auth-srv id="loginSrv" user-logged="{{userLogged}}" user-data="{{userData}}"></cl-auth-srv><div id="profilePhoto"><svg hidden$="{{userLogged}}" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div><div id="form" hidden$="{{userLogged}}"><paper-input label="User" value="{{user}}"></paper-input><paper-input label="Password" value="{{pass}}" type="password"></paper-input><paper-button raised="" on-tap="_login">Acceder</paper-button></div><div id="user" hidden$="{{!userLogged}}"><p>{{userData.usuario}}</p></div></template><script>
+    (function() {
+      'use strict';
+      
+      Polymer({
+        is: 'cl-login-page',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior,
+          Polymer.NeonAnimationRunnerBehavior,
+          Polymer.NeonAnimatableBehavior
+        ],
+
+        properties: {
+          user: {
+            type: String,
+            value: ''
+          },
+          pass: {
+            type: String,
+            value: ''
+          },
+          userData:{
+            type: Object,
+            observer: '_userExist',
+            notify: true
+          },
+          userLogged:{
+            type: Boolean,
+            notify: true
+          },
+
+
+          animationConfig: {
+            value: function() {
+              return {
+                'entry': {
+                  name: 'fade-in-animation',
+                  node: this
+                }
+              }
+            }
+          },
+          sharedElements: {
+            value: function() {
+              return {
+                'profilePhoto': this.$.profilePhoto
+              }
+            }
+          }
+
+        },
+
+        listeners: {
+          // this event is fired when the animation finishes
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
+
+        ready: function(){
+        },
+
+        show: function(){
+          this.playAnimation('entry');
+          this.$.loginSrv.dologin({ obtener_session_info : true });
+        },
+
+        _onNeonAnimationFinish: function(){
+          this.style.opacity = 1;
+        },
+
+        _login: function(){
+          this.$.loginSrv.dologin(arguments[1] ?  {login:{ 
+            user: this.user,
+            password: this.pass
+          }} : arguments[0]);
+        },
+
+        _userExist: function(){
+          console.log(this.userData);
+          this.$.profilePhoto.style.backgroundImage = 'url('+this.userData.usuarioimg+')';
+          document.getElementById('htmlBody').userData = this.userData;
+        }
+
+
+
+      });
+    })();
+  </script></dom-module>
