@@ -1,0 +1,10 @@
+{
+    "title": "Calumma",
+    "business": "Telecoming",
+    "description": "<p>Calumma fue un proyecto alucinante<p>",
+    "stack": "Angular2, Redux, React, Yeoman, Gulp, Paas",
+    "images": [
+        "http://www.t2o.es/blog/imagenes/2016/01/adaptabilidad-material-design.gif",
+        "http://androcode.es/wp-content/uploads/2015/02/materialdesign_principles_metaphor1_morr1c.png"
+    ]
+}

@@ -1,0 +1,64 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+
+<dom-module id="cl-core-drop-element">
+  <template>
+
+    <style include="shared-styles"></style>
+    <style type="text/css">
+      #zone{
+        width: 300px; height:300px; border: 1px dashed black; position:relative;
+      };
+    </style>
+
+    <div id="zone" dropzone="copy">
+              
+    </div>
+
+    
+  </template>
+
+
+  <script>
+    (function() {
+      Polymer({
+        is: 'cl-core-drop-element',
+
+        properties: {
+          typeElement: {
+            type: String,
+            notify: true,
+          },
+        },
+
+        ready: function(){
+          console.log('generado elemento drop');
+
+          this.$['zone'].addEventListener('dragover', this.pruebaDragOver, false);
+          this.$['zone'].addEventListener('drop', this._dropElement, false);
+        },
+
+        pruebaDragOver : function () {
+          // console.log('dragover', arguments);
+          arguments[0].dataTransfer.effectAllowed = 'copy';
+          arguments[0].preventDefault();
+          return false;
+        },
+
+        _dropElement : function () {
+          console.log('Drop', arguments);
+          arguments[0].preventDefault();
+          var data = arguments[0].dataTransfer.getData("text");
+          console.warn(data);
+          var clone = document.getElementById(data).cloneNode();
+          clone.id = 'prueba2';
+          arguments[0].target.appendChild(clone);
+          return false;
+        }
+
+      });
+
+    })();
+  </script>
+
+</dom-module>

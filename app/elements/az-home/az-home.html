@@ -1,0 +1,334 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="../cl-core-drag-element/cl-core-drag-element.html">
+
+<link rel="import" href="../cl-core-drop-element/cl-core-drop-element.html">
+
+<link rel="import" href="../cl-comp-api/cl-comp-api.html">
+
+
+<dom-module id="az-home">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+
+      :host{
+        display: flex;
+        flex-direction: column;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .red-color {
+        color: #ec0000;
+        font-weight: 600;
+      }
+
+      .nav-inferior-activo {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .nav-inferior-activo div {
+          display: flex;
+          flex-direction: row;
+          padding: 1em;
+      }
+
+      .nav-inferior-activo div span {
+          padding: 0.2em;
+      }
+
+
+      .active-aggregations-container {
+        padding: 0em 1em 1em;
+        margin-top: -1em;
+      }
+
+      .agregation-group {
+        padding: 1em 0 0;
+      }
+
+      .header-agregation {
+        background: #fff;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+      }
+
+      .header-agregation div:last-child {
+        border-bottom: 0px;
+      }
+
+      .header-agregation > ul {
+        padding: 1em;
+        border-bottom: 1px solid rgba(0,0,0,0.12);
+        margin: 0;
+      }
+
+      .header-agregation > ul li {
+        list-style: none;
+      }
+
+      .header-agregation > ul li div {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5em 0;
+      }
+
+      .agregation-title {
+        padding: 0.3em 0;
+        text-transform: uppercase;
+      }
+
+      .agregation-value {
+        font-weight: bold;
+        font-size: 1.3em;
+      }
+
+      .agregation-value .decimales {
+        font-size: 0.8em;
+      }
+
+      .agregation-name {
+        color: #ec0000;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .agregation-gsi-value {
+        background-color: #e59d27;
+        color: #FFF;
+        border-radius: 20px;
+        width: 35px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 0.9em;
+      }
+
+      .active-list-group {
+        border-bottom: 1px solid rgba(0,0,0,0.12);
+      }
+
+      .active-list-group .button {
+        padding: 1em;
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .active-list-group-name {
+        font-weight: 600;
+        font-size: 1em;
+      }
+
+      .info-active-list {
+        background-color: #fbfbfb;
+      }
+
+      .info-active-list > div {
+        display: flex;
+        padding: 1em 1em;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+      }
+
+      .info-active-list > div > span {
+        font-size: 14px;
+      }
+
+      .info-active-list .product {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .info-ative-list-ul {
+      }
+
+      .info-ative-list-ul li {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 14px;
+        padding: 1em;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+      }
+      
+
+      @media (min-width: 480px) {
+        
+      }
+
+      @media (min-width: 480px) {
+        .home-profile-description {
+          font-size: 24px;
+          line-height: 1.79;
+          max-width: 900px;
+        }
+      }
+
+
+    </style>
+
+    <div class="nav-inferior-activo">
+      <div>
+        <span class="red-color">Formalizado</span>
+        <span class="red-color">|</span>
+        <span>Autorizado</span>
+      </div>
+    </div>
+
+    <section class="active-aggregations-container">
+      <div class="home-list-projects-container">
+        <iron-ajax
+          last-response="{{dataProjects}}"
+          handleAs="json"
+          url="/assets/projects/all-projects.json"
+          auto
+          >
+        </iron-ajax>
+        <template is="dom-repeat" items="{{_toArray(dataProjects)}}">
+          <div class="agregation-group">
+            <h3 class="agregation-name">
+              {{item.value.title}}
+            </h3>
+            <div class="header-agregation">
+              <ul>
+                <template is="dom-repeat" items="{{item.value.agregation}}" as="agregation">
+                  <li>
+                    <div>
+                      <span class="agregation-title">{{agregation.title}}</span>
+                      <span class="agregation-value">{{agregation.value}},<span class="decimales">50€</span></span>
+                    </div>
+                  </li>
+                </template>
+                <li>
+                  <div>
+                    <span class="agregation-title">GSI</span>
+                    <span class="agregation-gsi-value">I90</span>
+                  </div>
+                </li>
+              </ul>
+              <template is="dom-repeat" items="{{item.value.groups}}" as="group">
+                <div class="active-list-group">
+                  <div class="active-list-group button" on-tap="_handleTap">
+                    <span class="active-list-group-name">{{group.title}}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9">
+                        <path fill="#EC0000" fill-rule="nonzero" d="M.966 7.692L0 6.726 5.526 1.2a.683.683 0 0 1 .965 0l5.548 5.525-.964.968L6.01 2.648.966 7.692z"/>
+                    </svg>
+                  </div>
+                  <div id="product-id-{{index}}" class="info-active-list hide">
+                    <div>
+                      <span>Producto</span>
+                      <span>Disponible</span>
+                    </div>
+                    <ul class="info-ative-list-ul">
+                      <template is="dom-repeat" items="{{group.products}}" as="product">
+                        <li> 
+                          <div class="product">
+                            <span><b>{{product.name}}</b></span>
+                            <span>{{product.iban}}</span>
+                          </div>
+                          <span><b>{{product.disponible}}</b></span>
+                        </li>
+                      </template>
+                    </ul>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+
+    <footer class="home-footer">
+    </footer>
+
+
+  </template>
+
+
+  <script>
+    (function() {
+      Polymer({
+        is: 'az-home',
+
+        properties: {
+          search: {
+            type: String,
+            notify: true,
+            observer: '_dropObserver'
+          },
+          comp: {
+            type: Array,
+            notify: true,
+            observer: '_componentsObserver'
+          },
+          allComps: {
+            type: Array,
+            notify: true,
+            observer: '_allComponentsObserver'
+          }
+        },
+
+        // observers: [
+        //   '_routePageChanged(route.path)',
+        // ],
+
+        // _routePageChanged: function() {
+        //   console.log('yup', this.route);
+        // },
+
+        ready: function(){
+          var that = this;
+          // console.log(this);
+          // setTimeout(function(){
+          //   console.dir(that);
+          // }, 2000);
+
+        },
+
+        attached: function() {
+        },
+
+        _handleTap: function(item) {
+          var element = item.target.parentElement.parentElement.querySelector('#product-id-'+item.model.index);
+          if(element.classList.contains('hide')) {
+            element.classList.remove('hide');
+          }else {
+            console.log('añado clase');
+            element.classList.add('hide');
+          }
+        },
+
+
+
+        _toArray: function(obj){
+          console.log(obj);
+              return Object.keys(obj).map(function(key) {
+                return {
+                    name: key,
+                    value: obj[key]
+                };
+            });
+        }
+
+      });
+
+    })();
+  </script>
+
+</dom-module>

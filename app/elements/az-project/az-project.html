@@ -1,0 +1,136 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="az-project">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host{
+        display: flex;
+        flex-direction: column;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .project-title{
+        font-family: Averta;
+        font-size: 65px;
+        font-weight: 600;
+        text-align: left;
+        color: #ffffff;
+        margin: 70px 0 70px 25%;
+      }
+
+      .project-content {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-content-description {
+        display: flex;
+        flex-direction: row;
+        margin: 0 0 70px;
+      }
+
+      .project-content-business {
+        flex: 0 0 25%;
+        opacity: 0.5;
+        font-family: Averta;
+        font-size: 14px;
+        line-height: 3.3;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        text-align: left;
+        color: #ffffff;
+      }
+
+      .project-content-description-text p {
+        margin: 0;
+        font-family: 'Grifo S';
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 1.79;
+        text-align: left;
+        color: #ffffff;
+      }
+
+    </style>
+    <h1 class="project-title">
+      <span>{{dataProject.title}}</span>
+    </h1>
+    <section class="project-content">
+      <div class="project-content-description">
+        <span class="project-content-business">{{dataProject.business}}</span>
+        <div class="project-content-description-text" id="dataProjectDescription"></div>
+      </div>
+      <div class="project-images" id="projectImages">
+        <template is="dom-repeat" items="{{dataProject.images}}">
+          <img src="{{item}}" alt="">
+        </template>
+      </div>
+    </section>
+    <!--<a href="#/project/pepita">prueba</a>-->
+
+    <iron-ajax
+      id="ajax"
+      last-response="{{dataProject}}"
+      handleAs="json"
+      auto
+      >
+    </iron-ajax>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      
+      Polymer({
+        is: 'az-project',
+
+        properties: {
+          dataProject:{
+            type: Object,
+            observer: '_dataProjectDone'
+          },
+        },
+
+        observers: [
+          '_routePageChanged(route.path)',
+        ],
+
+        _routePageChanged: function() {
+          if((this.route.path !== "") && (this.route.prefix === "/project")) {
+            console.log('yup', this.route);
+            this.$.ajax.url = '/assets/projects/project-'+this.route.path.substr(1)+'.json';
+          }
+        },
+
+        ready: function() {
+          // var that = this;
+          // setTimeout(function(){
+          //   console.dir(that)
+          // }, 3000);
+          // console.dir(this.$.id);
+          // console.log(document.querySelector(this).id);
+          // console.log('ES MI RUTAAAAgfjfhjhj', this.id);
+        },
+
+        created : function() {
+          // console.dir('attached', this.$);
+        },
+
+        attached : function() {
+          // console.log(arguments);
+        },
+
+        _dataProjectDone: function() {
+          // console.log(this.dataProject);
+          Polymer.dom(this.$.dataProjectDescription).innerHTML = this.dataProject.description;
+          this.updateStyles();
+        }
+
+      });
+    })();
+  </script>
+
+</dom-module>

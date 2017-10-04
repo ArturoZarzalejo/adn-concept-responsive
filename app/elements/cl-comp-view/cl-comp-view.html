@@ -1,0 +1,112 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-up-animation.html">
+
+<link rel="import" href="../cl-comp-api/cl-comp-api.html">
+
+<dom-module id="cl-comp-view">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        opacity: 0;
+
+      }
+    </style>
+    <paper-material elevation="1">
+      <h2 class="page-title"><span>Component Test</span></h2>
+
+      <paper-input label="Buscar" value="{{searchText}}"></paper-input>
+
+      <cl-comp-api id="componentsApi" search="[[searchText]]" search-limit="10" search-response="{{list}}" debounce-duration="300"></cl-comp-api>
+
+      <template is="dom-repeat" items="[[list.search]]" as="item">
+        <p><span>[[item.comp_type_ctip_id]]</span> <span>[[item.comp_subtype_ctip_id]]</span></p>
+      </template>
+
+      <paper-button raised on-tap="_loadMore">Load more</paper-button>
+
+    </paper-material>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      
+      Polymer({
+        is: 'cl-comp-view',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior,
+          Polymer.NeonAnimationRunnerBehavior,
+          Polymer.NeonAnimatableBehavior
+        ],
+
+        properties: {
+          searchText: {
+            type: String,
+            value: ''
+          },
+          list: {
+            type: Array,
+            value: function(){
+              return [];
+            },
+            observer: '_listObserver'
+          },
+          selected: {
+            type: Object,
+            value: function(){
+              return {}; 
+            }
+          },
+          animationConfig: {
+            value: function() {
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  node: this,
+                  timing: {delay: 300, duration: 500}
+                }]
+              }
+            }
+          }
+        },
+
+        listeners: {
+          // this event is fired when the animation finishes
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
+
+        ready: function(){
+          this.playAnimation("entry");
+        },
+
+        _loadMore: function(){
+          this.$.componentsApi.searchNextPage();
+        },
+
+        _onNeonAnimationFinish: function(){
+          this.style.opacity = 1;
+
+        },
+
+        _listObserver: function(){
+          console.log(this.list);
+        }
+
+      });
+    })();
+  </script>
+
+</dom-module>

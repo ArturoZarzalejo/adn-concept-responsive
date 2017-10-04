@@ -1,0 +1,9 @@
+{
+    "title": "Serenity",
+    "business": "Grupo Santander",
+    "description": "<p class='no-margin'>serenity fue un proyecto <span>alucinante</span></p>",
+    "stack": "Angular2, Redux, React, Yeoman, Gulp, Paas",
+    "images": [
+        "http://www.t2o.es/blog/imagenes/2016/01/adaptabilidad-material-design.gif"
+    ]
+}

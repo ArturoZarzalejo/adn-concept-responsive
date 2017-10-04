@@ -1,0 +1,318 @@
+{
+    "riesgocomercial" : {
+        "title" : "Riesgo Comercial",
+        "agregation" : [
+            {
+                "title": "Saldo Dispuesto",
+                "value": "200.000"
+            },
+            {
+                "title": "Límite",
+                "value": "40.000"
+            },
+            {
+                "title": "Disponible",
+                "value": "500.000"
+            }
+        ],
+        "groups": [
+            {
+                "title" : "Descuento",
+                "products" : [
+                    {
+                        "name": "Descuento Comercial",
+                        "iban": "0049 1880 200 7602421",
+                        "disponible" : "200.000"
+                    },
+                    {
+                        "name": "Gestión de Cobro VMP",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "200.000"
+                    },
+                    {
+                        "name": "Prueba",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "400.000"
+                    }
+                ]
+            },
+            {
+                "title" : "Factoring",
+                 "products" : [
+                    {
+                        "name": "Factoring con recurso",
+                        "iban": "0049 3280 73 0010066666",
+                        "disponible" : "600.000"
+                    },
+                    {
+                        "name": "Gestión de Cobro 422",
+                        "iban": "0049 1234 123 5522134",
+                        "disponible" : "100.000"
+                    },
+                    {
+                        "name": "Prueba 5",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "50.000"
+                    }
+                ]
+            }
+        ]
+    },
+    "riesgofinanciero" : {
+        "title" : "Riesgo Financiero",
+        "agregation" : [
+            {
+                "title": "Saldo Dispuesto",
+                "value": "200.000"
+            },
+            {
+                "title": "Límite",
+                "value": "40.000"
+            },
+            {
+                "title": "Disponible",
+                "value": "500.000"
+            }
+        ],
+        "groups": [
+            {
+                "title" : "Confirming",
+                "products" : [
+                    {
+                        "name": "Confirming por Órdenes",
+                        "iban": "0049 1880 200 7602421",
+                        "disponible" : "200.000"
+                    },
+                    {
+                        "name": "inventado",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "200.000"
+                    },
+                    {
+                        "name": "Prueba",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "400.000"
+                    }
+                ]
+            },
+            {
+                "title" : "Póliza de Crédito",
+                 "products" : [
+                    {
+                        "name": "Factoring con recurso",
+                        "iban": "0049 3280 73 0010066666",
+                        "disponible" : "600.000"
+                    },
+                    {
+                        "name": "Gestión de Cobro 422",
+                        "iban": "0049 1234 123 5522134",
+                        "disponible" : "100.000"
+                    },
+                    {
+                        "name": "Prueba 5",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "50.000"
+                    }
+                ]
+            }
+        ]
+    },
+    "avalesnacionales" : {
+        "title" : "Avales Nacionales",
+        "agregation" : [
+            {
+                "title": "Saldo Dispuesto",
+                "value": "200.000"
+            },
+            {
+                "title": "Límite",
+                "value": "40.000"
+            },
+            {
+                "title": "Disponible",
+                "value": "500.000"
+            }
+        ],
+        "groups": [
+            {
+                "title" : "Preavales",
+                "products" : [
+                    {
+                        "name": "Confirming por Órdenes",
+                        "iban": "0049 1880 200 7602421",
+                        "disponible" : "200.000"
+                    },
+                    {
+                        "name": "inventado",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "200.000"
+                    },
+                    {
+                        "name": "Prueba",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "400.000"
+                    }
+                ]
+            },
+            {
+                "title" : "Avales Comerciales",
+                 "products" : [
+                    {
+                        "name": "Factoring con recurso",
+                        "iban": "0049 3280 73 0010066666",
+                        "disponible" : "600.000"
+                    },
+                    {
+                        "name": "Gestión de Cobro 422",
+                        "iban": "0049 1234 123 5522134",
+                        "disponible" : "100.000"
+                    },
+                    {
+                        "name": "Prueba 5",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "50.000"
+                    }
+                ]
+            },
+            {
+                "title" : "Avales Técnicos",
+                 "products" : [
+                    {
+                        "name": "Factoring con recurso",
+                        "iban": "0049 3280 73 0010066666",
+                        "disponible" : "600.000"
+                    },
+                    {
+                        "name": "Gestión de Cobro 422",
+                        "iban": "0049 1234 123 5522134",
+                        "disponible" : "100.000"
+                    },
+                    {
+                        "name": "Prueba 5",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "50.000"
+                    }
+                ]
+            },
+            {
+                "title" : "Avales Financieros",
+                 "products" : [
+                    {
+                        "name": "Factoring con recurso",
+                        "iban": "0049 3280 73 0010066666",
+                        "disponible" : "600.000"
+                    },
+                    {
+                        "name": "Gestión de Cobro 422",
+                        "iban": "0049 1234 123 5522134",
+                        "disponible" : "100.000"
+                    },
+                    {
+                        "name": "Prueba 5",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "50.000"
+                    }
+                ]
+            }
+        ]
+    },
+    "comex" : {
+        "title" : "COMEX",
+        "agregation" : [
+            {
+                "title": "Saldo Dispuesto",
+                "value": "200.000"
+            },
+            {
+                "title": "Límite",
+                "value": "40.000"
+            },
+            {
+                "title": "Disponible",
+                "value": "500.000"
+            }
+        ],
+        "groups": [
+            {
+                "title" : "Prefinanciación Export.",
+                "products" : [
+                    {
+                        "name": "Confirming por Órdenes",
+                        "iban": "0049 1880 200 7602421",
+                        "disponible" : "200.000"
+                    },
+                    {
+                        "name": "inventado",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "200.000"
+                    },
+                    {
+                        "name": "Prueba",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "400.000"
+                    }
+                ]
+            },
+            {
+                "title" : "Anticipo Exportación",
+                 "products" : [
+                    {
+                        "name": "Factoring con recurso",
+                        "iban": "0049 3280 73 0010066666",
+                        "disponible" : "600.000"
+                    },
+                    {
+                        "name": "Gestión de Cobro 422",
+                        "iban": "0049 1234 123 5522134",
+                        "disponible" : "100.000"
+                    },
+                    {
+                        "name": "Prueba 5",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "50.000"
+                    }
+                ]
+            },
+            {
+                "title" : "Financiación Importación",
+                 "products" : [
+                    {
+                        "name": "Factoring con recurso",
+                        "iban": "0049 3280 73 0010066666",
+                        "disponible" : "600.000"
+                    },
+                    {
+                        "name": "Gestión de Cobro 422",
+                        "iban": "0049 1234 123 5522134",
+                        "disponible" : "100.000"
+                    },
+                    {
+                        "name": "Prueba 5",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "50.000"
+                    }
+                ]
+            },
+            {
+                "title" : "Avales exterior",
+                 "products" : [
+                    {
+                        "name": "Factoring con recurso",
+                        "iban": "0049 3280 73 0010066666",
+                        "disponible" : "600.000"
+                    },
+                    {
+                        "name": "Gestión de Cobro 422",
+                        "iban": "0049 1234 123 5522134",
+                        "disponible" : "100.000"
+                    },
+                    {
+                        "name": "Prueba 5",
+                        "iban": "0049 1234 123 1234567",
+                        "disponible" : "50.000"
+                    }
+                ]
+            }
+        ]
+    }
+}
