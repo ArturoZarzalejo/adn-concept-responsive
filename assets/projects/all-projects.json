@@ -22,12 +22,14 @@
                     {
                         "name": "Descuento Comercial",
                         "iban": "0049 1880 200 7602421",
-                        "disponible" : "200.000"
+                        "disponible" : "200.000",
+                        "gsi" : "I90"
                     },
                     {
                         "name": "Gestión de Cobro VMP",
                         "iban": "0049 1234 123 1234567",
-                        "disponible" : "200.000"
+                        "disponible" : "200.000",
+                        "gsi" : "I30"
                     },
                     {
                         "name": "Prueba",

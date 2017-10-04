@@ -217,6 +217,19 @@
         }
       }
 
+      .table-product {
+         flex: 0 0 30%;
+      }
+      .table-first-product {
+        flex: 0 0 40%;
+      }
+
+      .table-list .gsi-table-list {
+
+      }
+
+      @media (min-width: 770px) {
+      }
 
 
       .info-active-list {
@@ -231,7 +244,7 @@
         border-bottom: 1px solid rgba(0,0,0,0.08);
       }
 
-      .info-active-list > div > span {
+      .info-active-list > div > span, .info-active-list > div > div {
         font-size: 14px;
       }
 
@@ -251,10 +264,16 @@
         padding: 1em;
         border-bottom: 1px solid rgba(0,0,0,0.05);
       }
+
+      #Disponible {
+        display: none;
+      }
       
 
       @media (min-width: 480px) {
-        
+        #Disponible {
+          display: block;
+        }
       }
 
       @media (min-width: 480px) {
@@ -264,9 +283,15 @@
           max-width: 900px;
         }
       }
+      
+      @media (min-width: 480px) {
+        .show-desktop {
+          display: none;
+        }
+      }
 
 
-    </style><div class="nav-inferior-activo"><div><span class="red-color">Formalizado</span> <span class="red-color">|</span> <span>Autorizado</span></div></div><section class="active-aggregations-container"><div class="home-list-projects-container"><iron-ajax last-response="{{dataProjects}}" handleas="json" url="/adn-concept-responsive/assets/projects/all-projects.json" auto=""></iron-ajax><template is="dom-repeat" items="{{_toArray(dataProjects)}}"><div class="agregation-group"><h3 class="agregation-name">{{item.value.title}}</h3><div class="header-agregation"><ul><template is="dom-repeat" items="{{item.value.agregation}}" as="agregation"><li><div><span class="agregation-title">{{agregation.title}}</span> <span class="agregation-value">{{agregation.value}},<span class="decimales">50€</span></span></div></li></template><li><div><span class="agregation-title">GSI</span> <span class="agregation-gsi-value">I90</span></div></li></ul><template is="dom-repeat" items="{{item.value.groups}}" as="group"><div class="active-list-group"><div class="active-list-group button" on-tap="_handleTap"><span class="active-list-group-name">{{group.title}}</span><div class="active-list-group-tablet"><ul><li><span class="table-group-title">Saldo Dispuesto</span> <span class="table-group-value">242.000,00€</span></li><li><span class="table-group-title">Límite</span> <span class="table-group-value">125.000,00€</span></li><li><span class="table-group-title">Disponible</span> <span class="table-group-value">50.000,00€</span></li><li><span class="table-group-title">GSI</span> <span class="table-group-value agregation-gsi-value gsi">I90</span></li></ul></div><svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewbox="0 0 12 9"><path fill="#EC0000" fill-rule="nonzero" d="M.966 7.692L0 6.726 5.526 1.2a.683.683 0 0 1 .965 0l5.548 5.525-.964.968L6.01 2.648.966 7.692z"></path></svg></div><div id="product-id-{{index}}" class="info-active-list hide"><div><span>Producto</span><div class="tablet-desktop-fields" style="display:none;"><span>Divisa</span> <span>Saldo Dispuesto</span> <span>Límite</span></div><span>Disponible</span></div><ul class="info-ative-list-ul"><template is="dom-repeat" items="{{group.products}}" as="product"><li><div class="product"><span><b>{{product.name}}</b></span> <span>{{product.iban}}</span></div><span><b>{{product.disponible}}</b></span></li></template></ul></div></div></template></div></div></template></div></section><footer class="home-footer"></footer></template><script>
+    </style><div class="nav-inferior-activo"><div><span class="red-color">Formalizado</span> <span class="red-color">|</span> <span>Autorizado</span></div></div><section class="active-aggregations-container"><div class="home-list-projects-container"><iron-ajax last-response="{{dataProjects}}" handleas="json" url="/assets/projects/all-projects.json" auto=""></iron-ajax><template is="dom-repeat" items="{{_toArray(dataProjects)}}"><div class="agregation-group"><h3 class="agregation-name">{{item.value.title}}</h3><div class="header-agregation"><ul><template is="dom-repeat" items="{{item.value.agregation}}" as="agregation"><li id="{{agregation.title}}"><div><span class="agregation-title">{{agregation.title}}</span> <span class="agregation-value">{{agregation.value}},<span class="decimales">50€</span></span></div></li></template><li><div><span class="agregation-title">GSI</span> <span class="agregation-gsi-value">I90</span></div></li></ul><template is="dom-repeat" items="{{item.value.groups}}" as="group"><div class="active-list-group"><div class="active-list-group button" on-tap="_handleTap"><span class="active-list-group-name">{{group.title}}</span><div class="active-list-group-tablet"><ul><li><span class="table-group-title">Saldo Dispuesto</span> <span class="table-group-value">242.000,00€</span></li><li><span class="table-group-title">Límite</span> <span class="table-group-value">125.000,00€</span></li><li><span class="table-group-title">Disponible</span> <span class="table-group-value">50.000,00€</span></li><li><span class="table-group-title">GSI</span> <span class="table-group-value agregation-gsi-value gsi">I90</span></li></ul></div><svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewbox="0 0 12 9"><path fill="#EC0000" fill-rule="nonzero" d="M.966 7.692L0 6.726 5.526 1.2a.683.683 0 0 1 .965 0l5.548 5.525-.964.968L6.01 2.648.966 7.692z"></path></svg></div><div id="product-id-{{index}}" class="info-active-list hide"><div class="table-list"><span class="product table-product table-first-product">Producto</span><div class="tablet-desktop-fields gsi-table-list table-product"><span>GSI</span></div><span class="table-product">Dispuesto</span></div><ul class="info-ative-list-ul"><template is="dom-repeat" items="{{group.products}}" as="product"><li><div class="product table-product table-first-product"><span><b>{{product.name}}</b></span> <span>{{product.iban}}</span></div><span class="table-list table-product">{{product.gsi}}</span> <span class="table-product"><b>{{product.disponible}}</b></span></li></template></ul></div></div></template></div></div></template></div></section><footer class="home-footer"></footer></template><script>
     (function() {
       Polymer({
         is: 'az-home',
@@ -310,7 +335,7 @@
         },
 
         _handleTap: function(item) {
-          var element = item.target.parentElement.parentElement.querySelector('#product-id-'+item.model.index);
+          var element = item.target.parentElement.parentElement.parentElement.querySelector('#product-id-'+item.model.index);
           if(element.classList.contains('hide')) {
             element.classList.remove('hide');
           }else {
