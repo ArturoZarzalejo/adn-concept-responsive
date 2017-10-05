@@ -44,12 +44,14 @@
                     {
                         "name": "Factoring con recurso",
                         "iban": "0049 3280 73 0010066666",
-                        "disponible" : "600.000"
+                        "disponible" : "600.000",
+                        "gsi" : "I60"
                     },
                     {
                         "name": "Gestión de Cobro 422",
                         "iban": "0049 1234 123 5522134",
-                        "disponible" : "100.000"
+                        "disponible" : "100.000",
+                        "gsi" : "I30"
                     },
                     {
                         "name": "Prueba 5",
@@ -83,7 +85,8 @@
                     {
                         "name": "Confirming por Órdenes",
                         "iban": "0049 1880 200 7602421",
-                        "disponible" : "200.000"
+                        "disponible" : "200.000",
+                        "gsi" : "I30"
                     },
                     {
                         "name": "inventado",
